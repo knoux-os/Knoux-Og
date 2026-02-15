@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KNOUX GUARDIAN - The Future of System Protection</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KNOUX GUARDIAN - النظام السينمائي التفاعلي</title>
+    <meta name="description" content="نظام حماية متقدم مع واجهة سينمائية تفاعلية وذكاء اصطناعي">
+    <meta name="theme-color" content="#0a0014" />
+    
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
+        /* ===== RESET & GLOBAL ===== */
         * {
             margin: 0;
             padding: 0;
@@ -20,6 +30,8 @@
             --purple-glow: rgba(191, 0, 255, 0.6);
             --black-deep: #050508;
             --black-card: #0a0a12;
+            --glass-bg: rgba(10, 10, 18, 0.7);
+            --glass-border: rgba(191, 0, 255, 0.2);
         }
 
         html {
@@ -31,10 +43,16 @@
             color: white;
             font-family: 'Exo 2', sans-serif;
             overflow-x: hidden;
-            line-height: 1.8;
+            line-height: 1.6;
         }
 
-        /* Animated Background Grid */
+        /* ===== CUSTOM SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(191, 0, 255, 0.05); }
+        ::-webkit-scrollbar-thumb { background: var(--purple-primary); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--purple-secondary); }
+
+        /* ===== ANIMATED BACKGROUND ===== */
         .bg-grid {
             position: fixed;
             top: 0;
@@ -55,7 +73,7 @@
             100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
         }
 
-        /* Particle System */
+        /* ===== PARTICLES ===== */
         .particles {
             position: fixed;
             top: 0;
@@ -84,49 +102,146 @@
             100% { transform: translateY(-10vh) scale(0.5); opacity: 0; }
         }
 
-        /* Hero Section - MASSIVE */
+        /* ===== GLASS CARD ===== */
+        .glass-card {
+            background: rgba(10, 10, 18, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(191, 0, 255, 0.3);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(191, 0, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: var(--purple-primary);
+            box-shadow: 0 30px 60px -12px rgba(191, 0, 255, 0.3), 0 0 40px rgba(191, 0, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(5, 5, 8, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(191, 0, 255, 0.3);
+            padding: 1rem 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--purple-primary), var(--purple-secondary), white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(191, 0, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover {
+            color: white;
+            text-shadow: 0 0 10px var(--purple-primary);
+        }
+
+        .nav-link.active {
+            background: rgba(191, 0, 255, 0.2);
+            color: white;
+            border: 1px solid var(--purple-primary);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, var(--purple-primary), var(--purple-dark));
+            color: white;
+            border: none;
+            padding: 0.6rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(191, 0, 255, 0.3);
+        }
+
+        .btn-login:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(191, 0, 255, 0.6);
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: 1px solid var(--purple-primary);
+            color: white;
+            padding: 0.6rem 1.8rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-logout:hover {
+            background: rgba(191, 0, 255, 0.2);
+            box-shadow: 0 0 20px rgba(191, 0, 255, 0.3);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+            padding: 2rem;
+        }
+
+        /* ===== HERO SECTION (السينمائي) ===== */
         .hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
-            background: 
-                radial-gradient(ellipse at 30% 20%, rgba(191, 0, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 80%, rgba(157, 78, 221, 0.1) 0%, transparent 50%),
-                var(--black-deep);
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, var(--purple-primary) 0%, transparent 60%);
-            opacity: 0.15;
-            animation: heroPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes heroPulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
-            50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.25; }
-        }
-
-        .logo-container {
             text-align: center;
-            z-index: 10;
-            animation: fadeInUp 2s ease-out;
-            padding: 2rem;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(80px); }
-            to { opacity: 1; transform: translateY(0); }
+            margin-top: -80px;
         }
 
         .main-title {
@@ -137,9 +252,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 100px var(--purple-glow);
+            animation: titleGlow 3s ease-in-out infinite alternate;
             letter-spacing: 0.15em;
-            animation: titleGlow 2s ease-in-out infinite alternate;
             line-height: 1.1;
         }
 
@@ -155,66 +269,23 @@
             letter-spacing: 0.8em;
             margin-top: 2rem;
             text-transform: uppercase;
-            text-shadow: 0 0 30px var(--purple-glow);
         }
 
-        .tagline {
-            font-family: 'Exo 2', sans-serif;
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 1.5rem;
-            letter-spacing: 0.3em;
-        }
-
-        .director {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 3rem;
-            letter-spacing: 0.4em;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            z-index: 10;
-        }
-
-        .scroll-indicator::after {
-            content: '▼';
-            font-size: 2.5rem;
-            color: var(--purple-primary);
-            text-shadow: 0 0 20px var(--purple-glow);
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(25px); }
-        }
-
-        /* Scene Sections - ENHANCED */
+        /* ===== SCENE SECTIONS ===== */
         .scene-section {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 6rem 2rem;
-            position: relative;
+            padding: 4rem 2rem;
             border-top: 2px solid rgba(191, 0, 255, 0.3);
-        }
-
-        .scene-section:nth-child(odd) {
-            background: linear-gradient(180deg, var(--black-deep) 0%, rgba(75, 0, 130, 0.15) 50%, var(--black-deep) 100%);
+            margin-bottom: 4rem;
         }
 
         .scene-header {
             text-align: center;
-            margin-bottom: 4rem;
-            z-index: 10;
+            margin-bottom: 3rem;
         }
 
         .scene-number {
@@ -223,7 +294,6 @@
             color: var(--purple-primary);
             letter-spacing: 0.8em;
             margin-bottom: 1rem;
-            text-shadow: 0 0 20px var(--purple-glow);
         }
 
         .scene-title {
@@ -234,57 +304,27 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 40px var(--purple-glow);
-        }
-
-        .scene-title-ar {
-            font-family: 'Exo 2', sans-serif;
-            font-size: 2rem;
-            color: var(--purple-light);
-            direction: rtl;
-            margin-top: 0.5rem;
-        }
-
-        .scene-duration {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 1.5rem;
-            letter-spacing: 0.3em;
-            padding: 0.5rem 2rem;
-            border: 1px solid rgba(191, 0, 255, 0.3);
-            border-radius: 50px;
-            display: inline-block;
         }
 
         .scene-image-container {
             width: 100%;
-            max-width: 1600px;
-            position: relative;
+            max-width: 1400px;
             border-radius: 30px;
             overflow: hidden;
-            box-shadow: 
-                0 0 80px rgba(191, 0, 255, 0.4),
-                0 0 160px rgba(157, 78, 221, 0.2),
-                0 0 240px rgba(191, 0, 255, 0.1);
-            animation: imageGlow 3s ease-in-out infinite alternate;
+            box-shadow: 0 0 80px rgba(191, 0, 255, 0.4);
             border: 2px solid rgba(191, 0, 255, 0.3);
+            transition: transform 0.5s ease;
         }
 
-        @keyframes imageGlow {
-            from { box-shadow: 0 0 60px rgba(191, 0, 255, 0.3), 0 0 120px rgba(157, 78, 221, 0.15); }
-            to { box-shadow: 0 0 100px rgba(191, 0, 255, 0.5), 0 0 200px rgba(157, 78, 221, 0.25), 0 0 300px rgba(191, 0, 255, 0.15); }
+        .scene-image-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 100px rgba(191, 0, 255, 0.6);
         }
 
         .scene-image {
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.8s ease;
-        }
-
-        .scene-image-container:hover .scene-image {
-            transform: scale(1.03);
         }
 
         .scene-description {
@@ -292,83 +332,161 @@
             margin-top: 3rem;
             text-align: center;
             color: rgba(255, 255, 255, 0.8);
-            line-height: 2;
             font-size: 1.2rem;
-            padding: 0 2rem;
+            line-height: 2;
         }
 
-        /* Features Section */
-        .features-section {
-            padding: 8rem 2rem;
-            background: linear-gradient(180deg, var(--black-deep), rgba(75, 0, 130, 0.2), var(--black-deep));
-        }
-
-        .features-container {
+        /* ===== PAGE SECTIONS ===== */
+        .page-section {
+            display: none;
             max-width: 1400px;
             margin: 0 auto;
         }
 
+        .page-section.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .section-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 5vw, 4rem);
+            font-size: 2.5rem;
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
             background: linear-gradient(135deg, var(--purple-primary), var(--purple-secondary), white);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 40px var(--purple-glow);
         }
 
-        .features-grid {
+        /* ===== DASHBOARD GRID ===== */
+        .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .feature-card {
-            background: linear-gradient(135deg, rgba(191, 0, 255, 0.08), rgba(75, 0, 130, 0.1));
-            border: 2px solid rgba(191, 0, 255, 0.2);
-            border-radius: 20px;
-            padding: 2.5rem;
-            transition: all 0.4s ease;
-            position: relative;
+        .stat-card {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--purple-primary);
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--purple-primary);
+            margin-bottom: 1rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 1rem 0;
             overflow: hidden;
         }
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
+        .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(191, 0, 255, 0.1), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, var(--purple-primary), var(--purple-secondary));
+            width: 0%;
+            transition: width 1s ease;
         }
 
-        .feature-card:hover::before {
-            left: 100%;
+        /* ===== MODULES GRID ===== */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .feature-card:hover {
-            background: linear-gradient(135deg, rgba(191, 0, 255, 0.15), rgba(75, 0, 130, 0.2));
-            border-color: var(--purple-primary);
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(191, 0, 255, 0.3);
+        .module-card {
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .module-icon {
+            font-size: 3rem;
+            color: var(--purple-primary);
+            margin-bottom: 1rem;
+        }
+
+        .module-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .module-status {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-active { background: rgba(0, 255, 0, 0.2); color: #00ff00; border: 1px solid #00ff00; }
+        .status-warning { background: rgba(255, 255, 0, 0.2); color: #ffff00; border: 1px solid #ffff00; }
+        .status-critical { background: rgba(255, 0, 0, 0.2); color: #ff0000; border: 1px solid #ff0000; }
+
+        .module-desc {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .module-score {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--purple-primary);
+        }
+
+        /* ===== FEATURES GRID ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            padding: 2.5rem;
+            text-align: center;
         }
 
         .feature-icon {
             font-size: 3rem;
             margin-bottom: 1.5rem;
-            display: block;
+            color: var(--purple-primary);
         }
 
         .feature-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--purple-primary);
+            font-size: 1.3rem;
             margin-bottom: 1rem;
-            font-size: 1.4rem;
+            color: white;
         }
 
         .feature-card p {
@@ -376,85 +494,17 @@
             line-height: 1.8;
         }
 
-        /* Technical Specs Section */
-        .specs-section {
-            padding: 8rem 2rem;
-            background: var(--black-deep);
-        }
-
-        .specs-container {
-            max-width: 1400px;
+        /* ===== DEVELOPER CARD ===== */
+        .developer-card {
+            max-width: 600px;
             margin: 0 auto;
-        }
-
-        .specs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .spec-card {
-            background: linear-gradient(135deg, rgba(191, 0, 255, 0.05), rgba(75, 0, 130, 0.08));
-            border: 2px solid rgba(191, 0, 255, 0.15);
-            border-radius: 20px;
-            padding: 2.5rem;
-            transition: all 0.4s ease;
-        }
-
-        .spec-card:hover {
-            background: linear-gradient(135deg, rgba(191, 0, 255, 0.1), rgba(75, 0, 130, 0.15));
-            border-color: var(--purple-primary);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(191, 0, 255, 0.2);
-        }
-
-        .spec-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--purple-primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .spec-card ul {
-            list-style: none;
-        }
-
-        .spec-card li {
-            padding: 0.8rem 0;
-            color: rgba(255, 255, 255, 0.75);
-            border-bottom: 1px solid rgba(191, 0, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .spec-card li::before {
-            content: '▸';
-            color: var(--purple-primary);
-        }
-
-        .spec-card li:last-child {
-            border-bottom: none;
-        }
-
-        /* About Developer Section */
-        .developer-section {
-            padding: 8rem 2rem;
-            background: linear-gradient(180deg, var(--black-deep), rgba(75, 0, 130, 0.25), var(--black-deep));
-        }
-
-        .developer-container {
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 3rem;
             text-align: center;
         }
 
         .developer-avatar {
-            width: 180px;
-            height: 180px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--purple-primary), var(--purple-dark));
             display: flex;
@@ -473,57 +523,36 @@
         }
 
         .developer-name {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: 2rem;
+            font-weight: 900;
             background: linear-gradient(135deg, white, var(--purple-light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             margin-bottom: 0.5rem;
         }
 
         .developer-role {
-            font-size: 1.3rem;
             color: var(--purple-primary);
             margin-bottom: 1rem;
-            letter-spacing: 0.2em;
         }
 
         .developer-location {
-            font-size: 1.1rem;
             color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .developer-bio {
-            max-width: 800px;
-            margin: 0 auto 3rem;
             color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            line-height: 2;
+            line-height: 1.8;
         }
 
-        /* Social Icons */
-        .social-section {
-            padding: 4rem 2rem;
-            background: var(--black-deep);
-        }
-
-        .social-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--purple-light);
-        }
-
+        /* ===== SOCIAL CARDS ===== */
         .social-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
+            margin-top: 3rem;
         }
 
         .social-card {
@@ -549,13 +578,6 @@
 
         .social-icon {
             font-size: 2rem;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--purple-primary), var(--purple-dark));
         }
 
         .social-info {
@@ -573,19 +595,13 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
-        /* Contact Section */
-        .contact-section {
-            padding: 4rem 2rem;
-            background: linear-gradient(180deg, var(--black-deep), rgba(75, 0, 130, 0.2));
-        }
-
+        /* ===== CONTACT CARDS ===== */
         .contact-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
+            margin-top: 2rem;
         }
 
         .contact-card {
@@ -609,63 +625,96 @@
             box-shadow: 0 20px 50px rgba(191, 0, 255, 0.4);
         }
 
-        .contact-icon {
-            font-size: 1.5rem;
+        /* ===== SETTINGS PAGE ===== */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
         }
 
-        /* EPIC Footer */
+        .settings-card {
+            padding: 2rem;
+        }
+
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(191, 0, 255, 0.2);
+        }
+
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+
+        .settings-label {
+            color: white;
+            font-weight: 500;
+        }
+
+        .settings-value {
+            color: var(--purple-primary);
+            font-weight: 600;
+        }
+
+        .toggle-switch {
+            width: 50px;
+            height: 24px;
+            background: rgba(191, 0, 255, 0.3);
+            border-radius: 30px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: var(--purple-primary);
+        }
+
+        .toggle-slider {
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            left: 28px;
+        }
+
+        /* ===== FOOTER ===== */
         .footer {
-            padding: 6rem 2rem 3rem;
+            padding: 4rem 2rem 2rem;
             background: linear-gradient(180deg, var(--black-deep), #020205);
             border-top: 3px solid var(--purple-primary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--purple-primary), var(--purple-secondary), var(--purple-primary), transparent);
-            animation: borderGlow 3s linear infinite;
-        }
-
-        @keyframes borderGlow {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+            margin-top: 4rem;
         }
 
         .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-brand {
-            text-align: center;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 3rem;
         }
 
         .footer-logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             background: linear-gradient(135deg, var(--purple-primary), var(--purple-secondary), white);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             margin-bottom: 1rem;
-            text-shadow: 0 0 40px var(--purple-glow);
         }
 
         .footer-tagline {
             color: rgba(255, 255, 255, 0.6);
-            font-size: 1.1rem;
-            letter-spacing: 0.2em;
+            font-size: 0.9rem;
         }
 
         .footer-section h4 {
@@ -673,7 +722,6 @@
             color: var(--purple-primary);
             margin-bottom: 1.5rem;
             font-size: 1.2rem;
-            letter-spacing: 0.1em;
         }
 
         .footer-links {
@@ -687,10 +735,7 @@
         .footer-links a {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            transition: 0.3s;
         }
 
         .footer-links a:hover {
@@ -700,14 +745,9 @@
 
         .footer-bottom {
             text-align: center;
-            padding-top: 3rem;
+            padding-top: 2rem;
             border-top: 1px solid rgba(191, 0, 255, 0.2);
-        }
-
-        .footer-copyright {
             color: rgba(255, 255, 255, 0.5);
-            font-size: 1rem;
-            letter-spacing: 0.1em;
         }
 
         .footer-heart {
@@ -720,411 +760,525 @@
             50% { transform: scale(1.2); }
         }
 
-        /* Responsive */
+        /* ===== LOADING ===== */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--black-deep);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 1s;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(191, 0, 255, 0.2);
+            border-top-color: var(--purple-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .scene-section {
-                padding: 4rem 1rem;
+            .navbar {
+                padding: 1rem;
             }
-            
-            .features-grid,
-            .specs-grid {
+
+            .nav-links {
+                gap: 0.5rem;
+            }
+
+            .nav-link {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .btn-login, .btn-logout {
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .settings-grid {
                 grid-template-columns: 1fr;
             }
 
-            .social-grid,
-            .contact-grid {
-                flex-direction: column;
-                align-items: center;
+            .social-card {
+                min-width: 150px;
             }
-
-            .social-card,
-            .contact-card {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
     </style>
+    
+    <!-- Auth0 SDK -->
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.1/auth0-spa-js.production.js"></script>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loading" class="loading">
+        <div class="loader"></div>
+        <p style="color: var(--purple-primary);">KNOUX GUARDIAN Loading...</p>
+    </div>
+
     <!-- Background Grid -->
     <div class="bg-grid"></div>
     
     <!-- Particle System -->
     <div class="particles" id="particles"></div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="logo-container">
-            <h1 class="main-title">KNOUX</h1>
-            <p class="subtitle">GUARDIAN</p>
-            <p class="tagline">SENTINEL CORE</p>
-            <p class="director">A Cinematic Experience by Eng. Sadek Elgazar</p>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">KNOUX</div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-page="home">الرئيسية</a>
+                <a href="#" class="nav-link" data-page="dashboard">لوحة التحكم</a>
+                <a href="#" class="nav-link" data-page="modules">الوحدات</a>
+                <a href="#" class="nav-link" data-page="features">المميزات</a>
+                <a href="#" class="nav-link" data-page="developer">المطور</a>
+                <a href="#" class="nav-link" data-page="settings">الإعدادات</a>
+                <button id="loginBtn" class="btn-login" style="display: none;">تسجيل الدخول</button>
+                <button id="logoutBtn" class="btn-logout" style="display: none;">تسجيل الخروج</button>
+            </div>
         </div>
-        <div class="scroll-indicator"></div>
-    </section>
+    </nav>
 
-    <!-- Scene 01: The Awakening -->
-    <section class="scene-section fade-in">
-        <div class="scene-header">
-            <p class="scene-number">SCENE 01</p>
-            <h2 class="scene-title">THE AWAKENING</h2>
-            <p class="scene-title-ar">استيقاظ النظام</p>
-            <p class="scene-duration">⚡ Duration: 15 Seconds | Atmosphere: Epic & Mysterious</p>
-        </div>
-        <div class="scene-image-container">
-            <img src="assets/scene_01_awakening.jpg" alt="The Awakening - Crystalline Shield" class="scene-image">
-        </div>
-        <p class="scene-description">
-            The scene opens in absolute darkness. A single point of vibrant purple light (#bf00ff) pulses like a powerful heartbeat, 
-            revealing a MASSIVE crystalline shield structure with intricate geometric patterns. Intense purple energy veins pulse 
-            through the crystal as dramatic lightning bolts of pure data crackle and spark around the structure. The camera orbits 
-            majestically as the structure rotates, with particles of light floating in the cosmic void.
-        </p>
-    </section>
+    <!-- Main Content -->
+    <main>
+        <!-- الصفحة الرئيسية (السينمائية) -->
+        <section id="home" class="page-section active">
+            <!-- Hero -->
+            <section class="hero">
+                <div class="logo-container">
+                    <h1 class="main-title">KNOUX</h1>
+                    <p class="subtitle">GUARDIAN</p>
+                    <p style="font-size: clamp(1rem, 2vw, 1.5rem); color: rgba(255,255,255,0.7); margin-top: 1.5rem; letter-spacing: 0.3em;">SENTINEL CORE</p>
+                    <p style="font-family: 'Cinzel', serif; font-size: 1rem; color: rgba(255,255,255,0.5); margin-top: 3rem; letter-spacing: 0.4em;">A Cinematic Experience by Eng. Sadek Elgazar</p>
+                </div>
+                <div style="position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); animation: bounce 2s infinite;">
+                    <i class="fas fa-chevron-down" style="font-size: 2.5rem; color: var(--purple-primary);"></i>
+                </div>
+            </section>
 
-    <!-- Scene 02: The Architecture -->
-    <section class="scene-section fade-in">
-        <div class="scene-header">
-            <p class="scene-number">SCENE 02</p>
-            <h2 class="scene-title">THE ARCHITECTURE</h2>
-            <p class="scene-title-ar">معمارية العظمة</p>
-            <p class="scene-duration">🏛️ Duration: 20 Seconds | Atmosphere: High-Tech</p>
-        </div>
-        <div class="scene-image-container">
-            <img src="assets/scene_02_architecture.jpg" alt="The Architecture - Floating Mega City" class="scene-image">
-        </div>
-        <p class="scene-description">
-            An epic fly-through of the KNOUX GUARDIAN system architecture rendered as a MASSIVE floating mega city in space. 
-            Enormous purple crystalline structures tower into the cosmic void. The Client Layer features giant floating HTML/CSS/JS 
-            symbols, the API Gateway appears as a colossal ring with rivers of purple energy, the Core Engine is a massive rotating 
-            sphere of pure light with neural networks extending outward like energy tentacles.
-        </p>
-    </section>
+            <!-- Scenes 01-08 -->
+            <section class="scene-section fade-in">
+                <div class="scene-header">
+                    <p class="scene-number">SCENE 01</p>
+                    <h2 class="scene-title">THE AWAKENING</h2>
+                    <p style="font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 1.5rem;">⚡ Duration: 15 Seconds | Atmosphere: Epic & Mysterious</p>
+                </div>
+                <div class="scene-image-container">
+                    <img src="assets/scene_01_awakening.jpg" alt="The Awakening" class="scene-image">
+                </div>
+                <p class="scene-description">
+                    The scene opens in absolute darkness. A single point of vibrant purple light (#bf00ff) pulses like a powerful heartbeat, 
+                    revealing a MASSIVE crystalline shield structure with intricate geometric patterns.
+                </p>
+            </section>
 
-    <!-- Scene 03: The 12 Guardians -->
-    <section class="scene-section fade-in">
-        <div class="scene-header">
-            <p class="scene-number">SCENE 03</p>
-            <h2 class="scene-title">THE 12 GUARDIANS</h2>
-            <p class="scene-title-ar">الأوصياء الـ12</p>
-            <p class="scene-duration">🔮 Duration: 30 Seconds | Atmosphere: Power & Control</p>
-        </div>
-        <div class="scene-image-container">
-            <img src="assets/scene_03_guardians.jpg" alt="The 12 Guardians" class="scene-image">
-        </div>
-        <p class="scene-description">
-            A SPECTACULAR showcase of the 12 Guardian modules in a MASSIVE grand throne room of light. Each module is dramatically 
-            revealed with its own unique powerful personality: Application Lifecycle, Backup Orchestrator, Disk Space Monitor, 
-            Driver Health, Forensic Analyzer, Network Monitor, Performance Optimizer, Power Manager, Registry Guardian, 
-            Security Hardener, Thermal Controller, and Update Guardian. All 12 orbit together in a majestic powerful formation.
-        </p>
-    </section>
+            <section class="scene-section fade-in">
+                <div class="scene-header">
+                    <p class="scene-number">SCENE 02</p>
+                    <h2 class="scene-title">THE ARCHITECTURE</h2>
+                    <p style="font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 1.5rem;">🏛️ Duration: 20 Seconds | Atmosphere: High-Tech</p>
+                </div>
+                <div class="scene-image-container">
+                    <img src="assets/scene_02_architecture.jpg" alt="The Architecture" class="scene-image">
+                </div>
+                <p class="scene-description">
+                    An epic fly-through of the KNOUX GUARDIAN system architecture rendered as a MASSIVE floating mega city in space.
+                </p>
+            </section>
 
-    <!-- Scene 04: The Dashboard -->
-    <section class="scene-section fade-in">
-        <div class="scene-header">
-            <p class="scene-number">SCENE 04</p>
-            <h2 class="scene-title">THE DASHBOARD</h2>
-            <p class="scene-title-ar">لوحة القيادة</p>
-            <p class="scene-duration">💻 Duration: 25 Seconds | Atmosphere: Dynamic & Alive</p>
-        </div>
-        <div class="scene-image-container">
-            <img src="assets/scene_04_dashboard.jpg" alt="The Dashboard" class="scene-image">
-        </div>
-        <p class="scene-description">
-            The KNOUX GUARDIAN dashboard comes to life with elegant smooth animations. Enormous glass-morphism panels materialize 
-            with blur effects. Giant real-time graphs pulse with intense purple energy - massive CPU gauges fluctuate with neon glow, 
-            large memory charts spin dynamically. The camera dolls through the interface like flying through a digital landscape, 
-            with massive data streams flowing like purple waterfalls.
-        </p>
-    </section>
+            <section class="scene-section fade-in">
+                <div class="scene-header">
+                    <p class="scene-number">SCENE 03</p>
+                    <h2 class="scene-title">THE 12 GUARDIANS</h2>
+                    <p style="font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 1.5rem;">🔮 Duration: 30 Seconds | Atmosphere: Power & Control</p>
+                </div>
+                <div class="scene-image-container">
+                    <img src="assets/scene_03_guardians.jpg" alt="The 12 Guardians" class="scene-image">
+                </div>
+                <p class="scene-description">
+                    A SPECTACULAR showcase of the 12 Guardian modules in a MASSIVE grand throne room of light.
+                </p>
+            </section>
 
-    <!-- Scene 05: Live Demo -->
-    <section class="scene-section fade-in">
-        <div class="scene-header">
-            <p class="scene-number">SCENE 05</p>
-            <h2 class="scene-title">LIVE DEMO</h2>
-            <p class="scene-title-ar">عرض حي</p>
-            <p class="scene-duration">🔥 Duration: 40 Seconds | Atmosphere: Interactive & Exciting</p>
-        </div>
-        <div class="scene-image-container">
-            <img src="assets/scene_05_demo.jpg" alt="Live Demo" class="scene-image">
-        </div>
-        <p class="scene-description">
-            Dynamic MASSIVE split-screen demonstration showing KNOUX GUARDIAN in action. Massive purple scan lines sweep across 
-            the digital system, red threat dots are neutralized by powerful purple force fields. Huge data streams flow into backup 
-            vaults with purple energy shields. Giant CPU usage graphs smooth out, massive temperature gauges drop with cooling waves, 
-            and enormous firewalls activate to block attacks in dramatic slow motion.
-        </p>
-    </section>
+            <section class="scene-section fade-in">
+                <div class="scene-header">
+                    <p class="scene-number">SCENE 04</p>
+                    <h2 class="scene-title">THE DASHBOARD</h2>
+                    <p style="font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 1.5rem;">💻 Duration: 25 Seconds | Atmosphere: Dynamic & Alive</p>
+                </div>
+                <div class="scene-image-container">
+                    <img src="assets/scene_04_dashboard.jpg" alt="The Dashboard" class="scene-image">
+                </div>
+                <p class="scene-description">
+                    The KNOUX GUARDIAN dashboard comes to life with elegant smooth animations and giant real-time graphs.
+                </p>
+            </section>
 
-    <!-- Scene 06: Global Protection -->
-    <section class="scene-section fade-in">
-        <div class="scene-header">
-            <p class="scene-number">SCENE 06</p>
-            <h2 class="scene-title">GLOBAL PROTECTION</h2>
-            <p class="scene-title-ar">حماية عالمية</p>
-            <p class="scene-duration">🌍 Duration: 20 Seconds | Atmosphere: Global & Majestic</p>
-        </div>
-        <div class="scene-image-container">
-            <img src="assets/scene_06_global.jpg" alt="Global Protection" class="scene-image">
-        </div>
-        <p class="scene-description">
-            MASSIVE epic global visualization from space. The camera zooms rapidly towards Earth surrounded by an ENORMOUS purple 
-            energy shield protecting the entire planet like a giant dome. Diving through the atmosphere, past continents, into a 
-            city, through a building, and into a massive server room where KNOUX GUARDIAN runs on a giant screen. Pulling back 
-            reveals thousands of purple protection points across the globe.
-        </p>
-    </section>
+            <section class="scene-section fade-in">
+                <div class="scene-header">
+                    <p class="scene-number">SCENE 05</p>
+                    <h2 class="scene-title">LIVE DEMO</h2>
+                    <p style="font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 1.5rem;">🔥 Duration: 40 Seconds | Atmosphere: Interactive & Exciting</p>
+                </div>
+                <div class="scene-image-container">
+                    <img src="assets/scene_05_demo.jpg" alt="Live Demo" class="scene-image">
+                </div>
+                <p class="scene-description">
+                    Dynamic MASSIVE split-screen demonstration showing KNOUX GUARDIAN in action.
+                </p>
+            </section>
 
-    <!-- Scene 07: The Future -->
-    <section class="scene-section fade-in">
-        <div class="scene-header">
-            <p class="scene-number">SCENE 07</p>
-            <h2 class="scene-title">THE FUTURE</h2>
-            <p class="scene-title-ar">المستقبل</p>
-            <p class="scene-duration">✨ Duration: 15 Seconds | Atmosphere: Limitless Ambition</p>
-        </div>
-        <div class="scene-image-container">
-            <img src="assets/scene_07_future.jpg" alt="The Future" class="scene-image">
-        </div>
-        <p class="scene-description">
-            Visionary MASSIVE futuristic finale showing the future of KNOUX GUARDIAN. The camera flies through an enormous portal 
-            of purple light into a futuristic mega city landscape where AI robots and humans work together in harmony. Giant floating 
-            holographic interfaces everywhere with intense purple glow. The ENORMOUS KNOUX logo dominates the skyline as a giant 
-            hologram covering buildings.
-        </p>
-    </section>
+            <section class="scene-section fade-in">
+                <div class="scene-header">
+                    <p class="scene-number">SCENE 06</p>
+                    <h2 class="scene-title">GLOBAL PROTECTION</h2>
+                    <p style="font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 1.5rem;">🌍 Duration: 20 Seconds | Atmosphere: Global & Majestic</p>
+                </div>
+                <div class="scene-image-container">
+                    <img src="assets/scene_06_global.jpg" alt="Global Protection" class="scene-image">
+                </div>
+                <p class="scene-description">
+                    MASSIVE epic global visualization from space with an ENORMOUS purple energy shield protecting the planet.
+                </p>
+            </section>
 
-    <!-- Scene 08: The Creator -->
-    <section class="scene-section fade-in">
-        <div class="scene-header">
-            <p class="scene-number">SCENE 08</p>
-            <h2 class="scene-title">THE CREATOR</h2>
-            <p class="scene-title-ar">المطور</p>
-            <p class="scene-duration">💜 Duration: 10 Seconds | Atmosphere: Personal & Epic</p>
-        </div>
-        <div class="scene-image-container">
-            <img src="assets/scene_08_creator.jpg" alt="The Creator" class="scene-image">
-        </div>
-        <p class="scene-description">
-            ULTRA POWERFUL closing scene with the dramatic silhouette of Eng. Sadek Elgazar standing before a MASSIVE holographic 
-            display of the KNOUX GUARDIAN system covering an entire wall. Bathed in intense dramatic purple rim light and volumetric 
-            lighting rays, the figure exudes absolute confidence and mastery like a true tech visionary. The giant KNOUX logo fades 
-            in below with burning purple fire effect.
-        </p>
-    </section>
+            <section class="scene-section fade-in">
+                <div class="scene-header">
+                    <p class="scene-number">SCENE 07</p>
+                    <h2 class="scene-title">THE FUTURE</h2>
+                    <p style="font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 1.5rem;">✨ Duration: 15 Seconds | Atmosphere: Limitless Ambition</p>
+                </div>
+                <div class="scene-image-container">
+                    <img src="assets/scene_07_future.jpg" alt="The Future" class="scene-image">
+                </div>
+                <p class="scene-description">
+                    Visionary MASSIVE futuristic finale showing a mega city where AI and humans work in harmony.
+                </p>
+            </section>
 
-    <!-- Features Section -->
-    <section class="features-section fade-in">
-        <div class="features-container">
-            <h2 class="section-title">⚡ CORE FEATURES</h2>
+            <section class="scene-section fade-in">
+                <div class="scene-header">
+                    <p class="scene-number">SCENE 08</p>
+                    <h2 class="scene-title">THE CREATOR</h2>
+                    <p style="font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 1.5rem;">💜 Duration: 10 Seconds | Atmosphere: Personal & Epic</p>
+                </div>
+                <div class="scene-image-container">
+                    <img src="assets/scene_08_creator.jpg" alt="The Creator" class="scene-image">
+                </div>
+                <p class="scene-description">
+                    ULTRA POWERFUL closing scene with the dramatic silhouette of Eng. Sadek Elgazar standing before a MASSIVE holographic display.
+                </p>
+            </section>
+
+            <!-- Features Section (نسخة احتياطية) -->
+            <section class="features-section" style="padding: 4rem 0;">
+                <div class="section-title">⚡ CORE FEATURES</div>
+                <div class="features-grid">
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Security Hardener</h3>
+                        <p>Advanced threat detection with real-time monitoring.</p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">💾</div>
+                        <h3>Backup Orchestrator</h3>
+                        <p>Intelligent backup management and cloud integration.</p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Performance Optimizer</h3>
+                        <p>Real-time system analysis and optimization.</p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">🌡️</div>
+                        <h3>Thermal Controller</h3>
+                        <p>Advanced temperature monitoring and cooling.</p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Network Monitor</h3>
+                        <p>Comprehensive network traffic analysis.</p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Forensic Analyzer</h3>
+                        <p>Deep system analysis and investigation.</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Dashboard Page -->
+        <section id="dashboard" class="page-section">
+            <h2 class="section-title">📊 لوحة التحكم التفاعلية</h2>
+            <div class="dashboard-grid" id="dashboard-grid">
+                <!-- تملأ بواسطة JavaScript -->
+            </div>
+            <div style="margin-top: 3rem;">
+                <h3 style="color: white; text-align: center; margin-bottom: 2rem;">إحصائيات شاملة</h3>
+                <canvas id="systemChart" style="max-height: 400px;"></canvas>
+            </div>
+        </section>
+
+        <!-- Modules Page -->
+        <section id="modules" class="page-section">
+            <h2 class="section-title">🧩 الوحدات الـ 12</h2>
+            <div class="modules-grid" id="modules-grid">
+                <!-- تملأ بواسطة JavaScript -->
+            </div>
+        </section>
+
+        <!-- Features Page -->
+        <section id="features" class="page-section">
+            <h2 class="section-title">⚙️ المميزات المتقدمة</h2>
             <div class="features-grid">
-                <div class="feature-card">
-                    <span class="feature-icon">🛡️</span>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">🛡️</div>
                     <h3>Security Hardener</h3>
                     <p>Advanced threat detection and neutralization with real-time monitoring and automatic response systems.</p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">💾</span>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">💾</div>
                     <h3>Backup Orchestrator</h3>
                     <p>Intelligent backup management with automated scheduling and secure cloud storage integration.</p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">📊</span>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">📊</div>
                     <h3>Performance Optimizer</h3>
                     <p>Real-time system analysis and optimization to maintain peak performance at all times.</p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🌡️</span>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">🌡️</div>
                     <h3>Thermal Controller</h3>
                     <p>Advanced temperature monitoring and cooling management to prevent overheating.</p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🌐</span>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">🌐</div>
                     <h3>Network Monitor</h3>
                     <p>Comprehensive network traffic analysis with intrusion detection and firewall protection.</p>
                 </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🔍</span>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">🔍</div>
                     <h3>Forensic Analyzer</h3>
                     <p>Deep system analysis and forensic investigation capabilities for security incidents.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technical Specifications -->
-    <section class="specs-section fade-in">
-        <div class="specs-container">
-            <h2 class="section-title">🎥 TECHNICAL SPECIFICATIONS</h2>
-            <div class="specs-grid">
-                <div class="spec-card">
-                    <h3>📷 CAMERA</h3>
-                    <ul>
-                        <li>ARRI ALEXA 65 IMAX</li>
-                        <li>Anamorphic Prime Lenses</li>
-                        <li>8K IMAX (8176 × 4320)</li>
-                        <li>Aspect Ratio: 2.35:1 Cinemascope</li>
-                        <li>Frame Rate: 60 fps</li>
-                        <li>Shallow Depth of Field</li>
-                    </ul>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Update Guardian</h3>
+                    <p>Automated update management with risk assessment and rollback capabilities.</p>
                 </div>
-                <div class="spec-card">
-                    <h3>💡 LIGHTING</h3>
-                    <ul>
-                        <li>Volumetric Purple Lighting</li>
-                        <li>Color: #bf00ff, #9d4edd, #4B0082</li>
-                        <li>Dolby Vision HDR</li>
-                        <li>Cinematic Lighting Rigs</li>
-                        <li>Particle Effects</li>
-                        <li>Anamorphic Lens Flares</li>
-                    </ul>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Driver Health Manager</h3>
+                    <p>Monitor and maintain driver health with crash analysis and updates.</p>
                 </div>
-                <div class="spec-card">
-                    <h3>🎵 SOUNDTRACK</h3>
-                    <ul>
-                        <li>Composer: Hans Zimmer Style</li>
-                        <li>Genre: Epic Hybrid Orchestra</li>
-                        <li>Full Orchestra + Electronic</li>
-                        <li>Choir for Epic Moments</li>
-                        <li>Duration: 3 Minutes</li>
-                        <li>Epic Percussion & Strings</li>
-                    </ul>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">🔋</div>
+                    <h3>Power Manager</h3>
+                    <p>Optimize power consumption and battery life with intelligent power plans.</p>
                 </div>
-                <div class="spec-card">
-                    <h3>🎬 PRODUCTION</h3>
-                    <ul>
-                        <li>Unreal Engine 5 Cinematic</li>
-                        <li>Motion Blur & Depth of Field</li>
-                        <li>Dolly & Crane Movements</li>
-                        <li>Orbital Rotations</li>
-                        <li>Push-ins & Pull-outs</li>
-                        <li>Smooth Tracking Shots</li>
-                    </ul>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Application Curator</h3>
+                    <p>Manage and optimize installed applications, detect abandoned software.</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Registry Guardian</h3>
+                    <p>Protect and optimize Windows registry, detect malware and bloatware.</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Disk Space Orchestrator</h3>
+                    <p>Intelligent disk space management with cleanup and analysis.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Developer Section -->
-    <section class="developer-section fade-in">
-        <div class="developer-container">
-            <h2 class="section-title">👨‍💻 ABOUT THE CREATOR</h2>
-            <div class="developer-avatar">👑</div>
-            <h3 class="developer-name">Eng. Sadek Elgazar</h3>
-            <p class="developer-role">Founder & Lead Developer</p>
-            <p class="developer-location">📍 Abu Dhabi, UAE</p>
-            <p class="developer-bio">
-                Visionary software engineer and cybersecurity expert dedicated to creating the next generation 
-                of system protection solutions. With KNOUX GUARDIAN, Eng. Sadek Elgazar brings Hollywood-level 
-                cinematic quality to system security, combining cutting-edge technology with stunning visual experiences.
-            </p>
-        </div>
-    </section>
+        <!-- Developer Page -->
+        <section id="developer" class="page-section">
+            <div class="developer-card glass-card">
+                <div class="developer-avatar">👑</div>
+                <h2 class="developer-name">Eng. Sadek Elgazar</h2>
+                <p class="developer-role">Founder & Lead Developer</p>
+                <p class="developer-location">📍 Abu Dhabi, UAE</p>
+                <p class="developer-bio">
+                    Visionary software engineer and cybersecurity expert dedicated to creating the next generation 
+                    of system protection solutions. With KNOUX GUARDIAN, Eng. Sadek Elgazar brings Hollywood-level 
+                    cinematic quality to system security, combining cutting-edge technology with stunning visual experiences.
+                </p>
+            </div>
 
-    <!-- Social Media Section -->
-    <section class="social-section fade-in">
-        <h3 class="social-title">🌐 CONNECT WITH KNOUX</h3>
-        <div class="social-grid">
-            <a href="https://twitter.com/knoux7" target="_blank" class="social-card">
-                <div class="social-icon">🐦</div>
-                <div class="social-info">
-                    <span class="social-name">Twitter</span>
-                    <span class="social-handle">@knoux7</span>
-                </div>
-            </a>
-            <a href="https://www.facebook.com/share/1bXebP7S7D/" target="_blank" class="social-card">
-                <div class="social-icon">📘</div>
-                <div class="social-info">
-                    <span class="social-name">Facebook</span>
-                    <span class="social-handle">KNOUX Official</span>
-                </div>
-            </a>
-            <a href="https://www.pinterest.com/knoux7" target="_blank" class="social-card">
-                <div class="social-icon">📌</div>
-                <div class="social-info">
-                    <span class="social-name">Pinterest</span>
-                    <span class="social-handle">@knoux7</span>
-                </div>
-            </a>
-            <a href="https://www.tiktok.com/@knoux_7" target="_blank" class="social-card">
-                <div class="social-icon">🎵</div>
-                <div class="social-info">
-                    <span class="social-name">TikTok</span>
-                    <span class="social-handle">@knoux_7</span>
-                </div>
-            </a>
-            <a href="https://www.snapchat.com/add/knooux7" target="_blank" class="social-card">
-                <div class="social-icon">👻</div>
-                <div class="social-info">
-                    <span class="social-name">Snapchat</span>
-                    <span class="social-handle">@knooux7</span>
-                </div>
-            </a>
-        </div>
-    </section>
+            <!-- Social Section -->
+            <h3 style="color: white; text-align: center; margin: 4rem 0 2rem;">🌐 تواصل مع KNOUX</h3>
+            <div class="social-grid">
+                <a href="https://twitter.com/knoux7" target="_blank" class="social-card">
+                    <div class="social-icon">🐦</div>
+                    <div class="social-info">
+                        <span class="social-name">Twitter</span>
+                        <span class="social-handle">@knoux7</span>
+                    </div>
+                </a>
+                <a href="https://www.facebook.com/share/1bXebP7S7D/" target="_blank" class="social-card">
+                    <div class="social-icon">📘</div>
+                    <div class="social-info">
+                        <span class="social-name">Facebook</span>
+                        <span class="social-handle">KNOUX Official</span>
+                    </div>
+                </a>
+                <a href="https://www.pinterest.com/knoux7" target="_blank" class="social-card">
+                    <div class="social-icon">📌</div>
+                    <div class="social-info">
+                        <span class="social-name">Pinterest</span>
+                        <span class="social-handle">@knoux7</span>
+                    </div>
+                </a>
+                <a href="https://www.tiktok.com/@knoux_7" target="_blank" class="social-card">
+                    <div class="social-icon">🎵</div>
+                    <div class="social-info">
+                        <span class="social-name">TikTok</span>
+                        <span class="social-handle">@knoux_7</span>
+                    </div>
+                </a>
+                <a href="https://www.snapchat.com/add/knooux7" target="_blank" class="social-card">
+                    <div class="social-icon">👻</div>
+                    <div class="social-info">
+                        <span class="social-name">Snapchat</span>
+                        <span class="social-handle">@knooux7</span>
+                    </div>
+                </a>
+            </div>
 
-    <!-- Contact Section -->
-    <section class="contact-section fade-in">
-        <h3 class="social-title">📲 GET IN TOUCH</h3>
-        <div class="contact-grid">
-            <a href="https://wa.me/971503281920" target="_blank" class="contact-card">
-                <span class="contact-icon">💬</span>
-                <span>WhatsApp</span>
-            </a>
-            <a href="mailto:contact@knoux.io" class="contact-card">
-                <span class="contact-icon">📧</span>
-                <span>contact@knoux.io</span>
-            </a>
-        </div>
-    </section>
+            <!-- Contact Section -->
+            <h3 style="color: white; text-align: center; margin: 4rem 0 2rem;">📲 اتصل بنا</h3>
+            <div class="contact-grid">
+                <a href="https://wa.me/971503281920" target="_blank" class="contact-card">
+                    <span class="contact-icon">💬</span>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="mailto:contact@knoux.io" class="contact-card">
+                    <span class="contact-icon">📧</span>
+                    <span>contact@knoux.io</span>
+                </a>
+            </div>
+        </section>
 
-    <!-- EPIC Footer -->
+        <!-- Settings Page -->
+        <section id="settings" class="page-section">
+            <h2 class="section-title">⚙️ الإعدادات</h2>
+            <div class="settings-grid">
+                <div class="settings-card glass-card">
+                    <h3 style="color: var(--purple-primary); margin-bottom: 2rem;">إعدادات النظام</h3>
+                    <div class="settings-item">
+                        <span class="settings-label">الوضع الليلي</span>
+                        <div class="toggle-switch active" id="darkModeToggle">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <span class="settings-label">الإشعارات</span>
+                        <div class="toggle-switch" id="notificationsToggle">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <span class="settings-label">التحديث التلقائي</span>
+                        <div class="toggle-switch active" id="autoUpdateToggle">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-card glass-card">
+                    <h3 style="color: var(--purple-primary); margin-bottom: 2rem;">إعدادات الأداء</h3>
+                    <div class="settings-item">
+                        <span class="settings-label">وضع الأداء العالي</span>
+                        <div class="toggle-switch" id="highPerformanceToggle">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <span class="settings-label">مراقبة الشبكة</span>
+                        <div class="toggle-switch active" id="networkMonitorToggle">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <span class="settings-label">النسخ الاحتياطي</span>
+                        <div class="toggle-switch active" id="backupToggle">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-card glass-card">
+                    <h3 style="color: var(--purple-primary); margin-bottom: 2rem;">إعدادات الأمان</h3>
+                    <div class="settings-item">
+                        <span class="settings-label">جدار الحماية</span>
+                        <div class="toggle-switch active" id="firewallToggle">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <span class="settings-label">الحماية من البرمجيات الخبيثة</span>
+                        <div class="toggle-switch active" id="malwareToggle">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <span class="settings-label">تسجيل الدخول بخطوتين</span>
+                        <div class="toggle-switch" id="twoFactorToggle">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-brand">
+            <div>
                 <h2 class="footer-logo">KNOUX</h2>
                 <p class="footer-tagline">THE FUTURE OF SYSTEM PROTECTION</p>
             </div>
             <div class="footer-section">
-                <h4>🎬 CINEMATIC SCENES</h4>
+                <h4>المشاهد السينمائية</h4>
                 <ul class="footer-links">
-                    <li><a href="#">The Awakening</a></li>
-                    <li><a href="#">The Architecture</a></li>
-                    <li><a href="#">The 12 Guardians</a></li>
-                    <li><a href="#">The Dashboard</a></li>
+                    <li><a href="#" data-page="home">The Awakening</a></li>
+                    <li><a href="#" data-page="home">The Architecture</a></li>
+                    <li><a href="#" data-page="home">The 12 Guardians</a></li>
+                    <li><a href="#" data-page="home">The Dashboard</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>⚡ CORE MODULES</h4>
+                <h4>الوحدات الأساسية</h4>
                 <ul class="footer-links">
-                    <li><a href="#">Security Hardener</a></li>
-                    <li><a href="#">Performance Optimizer</a></li>
-                    <li><a href="#">Network Monitor</a></li>
-                    <li><a href="#">Backup Orchestrator</a></li>
+                    <li><a href="#" data-page="modules">Security Hardener</a></li>
+                    <li><a href="#" data-page="modules">Performance Optimizer</a></li>
+                    <li><a href="#" data-page="modules">Network Monitor</a></li>
+                    <li><a href="#" data-page="modules">Backup Orchestrator</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>🌐 CONNECT</h4>
+                <h4>تواصل</h4>
                 <ul class="footer-links">
                     <li><a href="https://twitter.com/knoux7" target="_blank">Twitter</a></li>
                     <li><a href="https://www.facebook.com/share/1bXebP7S7D/" target="_blank">Facebook</a></li>
@@ -1134,46 +1288,395 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p class="footer-copyright">
-                © 2024 KNOUX GUARDIAN. Created with <span class="footer-heart">💜</span> by Eng. Sadek Elgazar | Abu Dhabi, UAE
-            </p>
+            <p>© 2024 KNOUX GUARDIAN. Created with <span class="footer-heart">💜</span> by Eng. Sadek Elgazar | Abu Dhabi, UAE</p>
         </div>
     </footer>
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
-        // Create particle background
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 80; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 12 + 's';
-            particle.style.animationDuration = (8 + Math.random() * 8) + 's';
-            particle.style.opacity = 0.3 + Math.random() * 0.7;
-            particlesContainer.appendChild(particle);
+        // ===== تهيئة Auth0 =====
+        const auth0Config = {
+            domain: "knoux-auth.us.auth0.com",
+            clientId: "zmM6BCSNmZQHtRD9GWIl6bLWiAoa3IXE",
+            authorizationParams: {
+                redirect_uri: window.location.origin,
+                audience: "https://knoux-auth.us.auth0.com/api/v2/",
+                scope: "openid profile email"
+            },
+            cacheLocation: "localstorage"
+        };
+
+        let auth0Client = null;
+        let isAuthenticated = false;
+        let userProfile = null;
+
+        // Initialize Auth0
+        async function initAuth0() {
+            try {
+                auth0Client = await createAuth0Client(auth0Config);
+                
+                // Check if user is authenticated
+                isAuthenticated = await auth0Client.isAuthenticated();
+                
+                if (isAuthenticated) {
+                    userProfile = await auth0Client.getUser();
+                    console.log("Authenticated user:", userProfile);
+                    updateUIForAuth(true);
+                } else {
+                    // Check for redirect from Auth0
+                    const query = window.location.search;
+                    if (query.includes("code=") && query.includes("state=")) {
+                        try {
+                            await auth0Client.handleRedirectCallback();
+                            isAuthenticated = await auth0Client.isAuthenticated();
+                            userProfile = await auth0Client.getUser();
+                            updateUIForAuth(true);
+                            // Remove query params from URL
+                            window.history.replaceState({}, document.title, window.location.pathname);
+                        } catch (e) {
+                            console.error("Error handling redirect:", e);
+                        }
+                    } else {
+                        updateUIForAuth(false);
+                    }
+                }
+            } catch (e) {
+                console.error("Error initializing Auth0:", e);
+            }
         }
 
-        // Scroll animations
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
+        // Update UI based on authentication state
+        function updateUIForAuth(authenticated) {
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            if (authenticated) {
+                loginBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-block';
+            } else {
+                loginBtn.style.display = 'inline-block';
+                logoutBtn.style.display = 'none';
+            }
+        }
 
-        fadeElements.forEach(el => observer.observe(el));
+        // Login function
+        async function login() {
+            try {
+                await auth0Client.loginWithRedirect();
+            } catch (e) {
+                console.error("Login error:", e);
+            }
+        }
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        // Logout function
+        async function logout() {
+            try {
+                await auth0Client.logout({
+                    logoutParams: {
+                        returnTo: window.location.origin
+                    }
+                });
+            } catch (e) {
+                console.error("Logout error:", e);
+            }
+        }
+
+        // ===== Particles =====
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 80; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 12 + 's';
+                particle.style.animationDuration = (8 + Math.random() * 8) + 's';
+                particle.style.opacity = 0.3 + Math.random() * 0.7;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // ===== Page Navigation =====
+        function setupNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    link.classList.add('active');
+                    
+                    // Get page id
+                    const pageId = link.getAttribute('data-page');
+                    
+                    // Hide all sections
+                    document.querySelectorAll('.page-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Show selected section
+                    document.getElementById(pageId).classList.add('active');
+                    
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             });
+        }
+
+        // ===== Dashboard Data =====
+        async function loadDashboardData() {
+            try {
+                // Try to fetch from API
+                const response = await fetch('http://localhost:5000/api/v1/dashboard');
+                const data = await response.json();
+                renderDashboard(data);
+            } catch (error) {
+                console.log("Using mock data (API not available)");
+                // Mock data
+                const mockData = {
+                    health_score: 92,
+                    performance: {
+                        cpu: { percent: 45, cores: 8 },
+                        memory: { percent: 62, used: 16e9, total: 32e9 }
+                    },
+                    disk: [
+                        { mountpoint: 'C:', total: 500e9, used: 320e9, percent: 64 },
+                        { mountpoint: 'D:', total: 1000e9, used: 450e9, percent: 45 }
+                    ],
+                    network: {
+                        connections: { total: 142, established: 38 },
+                        io_counters: { bytes_sent: 2.5e9, bytes_recv: 8.3e9 }
+                    },
+                    security: { overall_score: 94 },
+                    thermal: { cpu_temp: 58, gpu_temp: 62 },
+                    power: { battery_percent: 78, power_plugged: false }
+                };
+                renderDashboard(mockData);
+            }
+        }
+
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function renderDashboard(data) {
+            const grid = document.getElementById('dashboard-grid');
+            grid.innerHTML = '';
+
+            // System Health
+            grid.innerHTML += `
+                <div class="stat-card glass-card">
+                    <div class="stat-icon">🛡️</div>
+                    <div class="stat-label">صحة النظام</div>
+                    <div class="stat-value">${data.health_score}%</div>
+                    <div class="progress-bar"><div class="progress-fill" style="width: ${data.health_score}%"></div></div>
+                </div>
+            `;
+
+            // CPU
+            grid.innerHTML += `
+                <div class="stat-card glass-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-label">المعالج (CPU)</div>
+                    <div class="stat-value">${data.performance.cpu.percent}%</div>
+                    <div style="color: rgba(255,255,255,0.6);">${data.performance.cpu.cores} أنوية</div>
+                </div>
+            `;
+
+            // Memory
+            grid.innerHTML += `
+                <div class="stat-card glass-card">
+                    <div class="stat-icon">🧠</div>
+                    <div class="stat-label">الذاكرة (RAM)</div>
+                    <div class="stat-value">${data.performance.memory.percent}%</div>
+                    <div style="color: rgba(255,255,255,0.6);">${formatBytes(data.performance.memory.used)} / ${formatBytes(data.performance.memory.total)}</div>
+                </div>
+            `;
+
+            // Disk
+            grid.innerHTML += `
+                <div class="stat-card glass-card">
+                    <div class="stat-icon">💾</div>
+                    <div class="stat-label">المساحة التخزينية</div>
+                    <div class="stat-value">${data.disk[0].percent}%</div>
+                    <div style="color: rgba(255,255,255,0.6);">${formatBytes(data.disk[0].used)} / ${formatBytes(data.disk[0].total)} (C:)</div>
+                </div>
+            `;
+
+            // Network
+            grid.innerHTML += `
+                <div class="stat-card glass-card">
+                    <div class="stat-icon">🌐</div>
+                    <div class="stat-label">اتصالات الشبكة</div>
+                    <div class="stat-value">${data.network.connections.total}</div>
+                    <div style="color: rgba(255,255,255,0.6);">${data.network.connections.established} نشطة</div>
+                </div>
+            `;
+
+            // Security
+            grid.innerHTML += `
+                <div class="stat-card glass-card">
+                    <div class="stat-icon">🔒</div>
+                    <div class="stat-label">الأمان</div>
+                    <div class="stat-value">${data.security.overall_score}%</div>
+                    <div style="color: rgba(255,255,255,0.6);">مستوى حماية عالي</div>
+                </div>
+            `;
+
+            // Thermal
+            grid.innerHTML += `
+                <div class="stat-card glass-card">
+                    <div class="stat-icon">🌡️</div>
+                    <div class="stat-label">درجة الحرارة</div>
+                    <div class="stat-value">${data.thermal.cpu_temp}°C</div>
+                    <div style="color: rgba(255,255,255,0.6);">GPU: ${data.thermal.gpu_temp}°C</div>
+                </div>
+            `;
+
+            // Power
+            grid.innerHTML += `
+                <div class="stat-card glass-card">
+                    <div class="stat-icon">🔋</div>
+                    <div class="stat-label">الطاقة</div>
+                    <div class="stat-value">${data.power.battery_percent || 'N/A'}%</div>
+                    <div style="color: rgba(255,255,255,0.6);">${data.power.power_plugged ? 'موصول بالتيار' : 'بطارية'}</div>
+                </div>
+            `;
+
+            // Create chart
+            createSystemChart(data);
+        }
+
+        function createSystemChart(data) {
+            const ctx = document.getElementById('systemChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['CPU', 'RAM', 'C: Disk', 'D: Disk', 'Network', 'Security', 'Temperature'],
+                    datasets: [{
+                        label: 'النسبة المئوية',
+                        data: [
+                            data.performance.cpu.percent,
+                            data.performance.memory.percent,
+                            data.disk[0].percent,
+                            data.disk[1]?.percent || 45,
+                            75,
+                            data.security.overall_score,
+                            58
+                        ],
+                        backgroundColor: 'rgba(191, 0, 255, 0.2)',
+                        borderColor: '#bf00ff',
+                        borderWidth: 2,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { labels: { color: 'white' } }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, max: 100, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: 'white' } },
+                        x: { grid: { display: false }, ticks: { color: 'white' } }
+                    }
+                }
+            });
+        }
+
+        // ===== Modules Data =====
+        async function loadModulesData() {
+            const modules = [
+                { name: 'Security Hardener', icon: '🛡️', status: 'active', desc: 'تعزيز الأمان ضد التهديدات', score: 94 },
+                { name: 'Backup Orchestrator', icon: '💾', status: 'active', desc: 'إدارة النسخ الاحتياطية', score: 88 },
+                { name: 'Performance Optimizer', icon: '📊', status: 'warning', desc: 'تحسين أداء النظام', score: 72 },
+                { name: 'Thermal Controller', icon: '🌡️', status: 'critical', desc: 'التحكم بدرجات الحرارة', score: 45 },
+                { name: 'Network Monitor', icon: '🌐', status: 'active', desc: 'مراقبة الشبكة', score: 91 },
+                { name: 'Forensic Analyzer', icon: '🔍', status: 'active', desc: 'تحليل الأدلة الجنائية', score: 83 },
+                { name: 'Update Guardian', icon: '🚀', status: 'active', desc: 'إدارة التحديثات', score: 79 },
+                { name: 'Driver Health Manager', icon: '⚡', status: 'warning', desc: 'صحة التعريفات', score: 68 },
+                { name: 'Power Manager', icon: '🔋', status: 'active', desc: 'إدارة الطاقة', score: 85 },
+                { name: 'Application Curator', icon: '📦', status: 'active', desc: 'تنظيم التطبيقات', score: 77 },
+                { name: 'Registry Guardian', icon: '📝', status: 'active', desc: 'حماية السجل', score: 81 },
+                { name: 'Disk Space Orchestrator', icon: '🔄', status: 'warning', desc: 'إدارة المساحة', score: 62 }
+            ];
+
+            const grid = document.getElementById('modules-grid');
+            grid.innerHTML = '';
+
+            modules.forEach(mod => {
+                grid.innerHTML += `
+                    <div class="module-card glass-card" onclick="alert('سيتم فتح تفاصيل وحدة ${mod.name}')">
+                        <div class="module-icon">${mod.icon}</div>
+                        <div class="module-name">${mod.name}</div>
+                        <div class="module-status status-${mod.status}">${mod.status === 'active' ? 'نشط' : mod.status === 'warning' ? 'تحذير' : 'حرج'}</div>
+                        <div class="module-desc">${mod.desc}</div>
+                        <div class="module-score">${mod.score}%</div>
+                    </div>
+                `;
+            });
+        }
+
+        // ===== Settings Toggles =====
+        function setupSettings() {
+            const toggles = document.querySelectorAll('.toggle-switch');
+            toggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    toggle.classList.toggle('active');
+                });
+            });
+        }
+
+        // ===== Scroll Animations =====
+        function setupScrollAnimations() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            fadeElements.forEach(el => observer.observe(el));
+        }
+
+        // ===== Hide Loading Screen =====
+        function hideLoading() {
+            setTimeout(() => {
+                document.getElementById('loading').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                }, 1000);
+            }, 500);
+        }
+
+        // ===== Initialize Everything =====
+        window.addEventListener('DOMContentLoaded', async () => {
+            createParticles();
+            setupNavigation();
+            setupScrollAnimations();
+            setupSettings();
+            await loadDashboardData();
+            loadModulesData();
+            
+            // Initialize Auth0
+            await initAuth0();
+            
+            // Setup login/logout buttons
+            document.getElementById('loginBtn').addEventListener('click', login);
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+            
+            hideLoading();
         });
     </script>
 </body>
