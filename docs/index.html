@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KNOUX GUARDIAN - The Future of System Protection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --purple-primary: #bf00ff;
+            --purple-secondary: #9d4edd;
+            --purple-dark: #4B0082;
+            --purple-light: #e0aaff;
+            --purple-glow: rgba(191, 0, 255, 0.6);
+            --black-deep: #050508;
+            --black-card: #0a0a12;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black-deep);
+            color: white;
+            font-family: 'Exo 2', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        /* Animated Background Grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(rgba(191, 0, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(191, 0, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        /* Particle System */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--purple-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--purple-primary), 0 0 20px var(--purple-secondary);
+            animation: floatParticle 12s infinite;
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(110vh) scale(0); opacity: 0; }
+            10% { opacity: 1; transform: translateY(100vh) scale(1); }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(0.5); opacity: 0; }
+        }
+
+        /* Hero Section - MASSIVE */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(191, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(157, 78, 221, 0.1) 0%, transparent 50%),
+                var(--black-deep);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--purple-primary) 0%, transparent 60%);
+            opacity: 0.15;
+            animation: heroPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes heroPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+            50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.25; }
+        }
+
+        .logo-container {
+            text-align: center;
+            z-index: 10;
+            animation: fadeInUp 2s ease-out;
+            padding: 2rem;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(80px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .main-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(4rem, 15vw, 12rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--purple-primary) 0%, var(--purple-secondary) 50%, white 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 100px var(--purple-glow);
+            letter-spacing: 0.15em;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+            line-height: 1.1;
+        }
+
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 30px var(--purple-primary)) drop-shadow(0 0 60px var(--purple-secondary)); }
+            to { filter: drop-shadow(0 0 50px var(--purple-primary)) drop-shadow(0 0 100px var(--purple-secondary)) drop-shadow(0 0 150px var(--purple-primary)); }
+        }
+
+        .subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.2rem, 4vw, 2.5rem);
+            color: var(--purple-light);
+            letter-spacing: 0.8em;
+            margin-top: 2rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 30px var(--purple-glow);
+        }
+
+        .tagline {
+            font-family: 'Exo 2', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1.5rem;
+            letter-spacing: 0.3em;
+        }
+
+        .director {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 3rem;
+            letter-spacing: 0.4em;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 10;
+        }
+
+        .scroll-indicator::after {
+            content: '▼';
+            font-size: 2.5rem;
+            color: var(--purple-primary);
+            text-shadow: 0 0 20px var(--purple-glow);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(25px); }
+        }
+
+        /* Scene Sections - ENHANCED */
+        .scene-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 6rem 2rem;
+            position: relative;
+            border-top: 2px solid rgba(191, 0, 255, 0.3);
+        }
+
+        .scene-section:nth-child(odd) {
+            background: linear-gradient(180deg, var(--black-deep) 0%, rgba(75, 0, 130, 0.15) 50%, var(--black-deep) 100%);
+        }
+
+        .scene-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            z-index: 10;
+        }
+
+        .scene-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--purple-primary);
+            letter-spacing: 0.8em;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px var(--purple-glow);
+        }
+
+        .scene-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, white 0%, var(--purple-secondary) 50%, var(--purple-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 40px var(--purple-glow);
+        }
+
+        .scene-title-ar {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 2rem;
+            color: var(--purple-light);
+            direction: rtl;
+            margin-top: 0.5rem;
+        }
+
+        .scene-duration {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 1.5rem;
+            letter-spacing: 0.3em;
+            padding: 0.5rem 2rem;
+            border: 1px solid rgba(191, 0, 255, 0.3);
+            border-radius: 50px;
+            display: inline-block;
+        }
+
+        .scene-image-container {
+            width: 100%;
+            max-width: 1600px;
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 
+                0 0 80px rgba(191, 0, 255, 0.4),
+                0 0 160px rgba(157, 78, 221, 0.2),
+                0 0 240px rgba(191, 0, 255, 0.1);
+            animation: imageGlow 3s ease-in-out infinite alternate;
+            border: 2px solid rgba(191, 0, 255, 0.3);
+        }
+
+        @keyframes imageGlow {
+            from { box-shadow: 0 0 60px rgba(191, 0, 255, 0.3), 0 0 120px rgba(157, 78, 221, 0.15); }
+            to { box-shadow: 0 0 100px rgba(191, 0, 255, 0.5), 0 0 200px rgba(157, 78, 221, 0.25), 0 0 300px rgba(191, 0, 255, 0.15); }
+        }
+
+        .scene-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+
+        .scene-image-container:hover .scene-image {
+            transform: scale(1.03);
+        }
+
+        .scene-description {
+            max-width: 1000px;
+            margin-top: 3rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 2;
+            font-size: 1.2rem;
+            padding: 0 2rem;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 8rem 2rem;
+            background: linear-gradient(180deg, var(--black-deep), rgba(75, 0, 130, 0.2), var(--black-deep));
+        }
+
+        .features-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, var(--purple-primary), var(--purple-secondary), white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px var(--purple-glow);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(191, 0, 255, 0.08), rgba(75, 0, 130, 0.1));
+            border: 2px solid rgba(191, 0, 255, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(191, 0, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            background: linear-gradient(135deg, rgba(191, 0, 255, 0.15), rgba(75, 0, 130, 0.2));
+            border-color: var(--purple-primary);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(191, 0, 255, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--purple-primary);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+        }
+
+        /* Technical Specs Section */
+        .specs-section {
+            padding: 8rem 2rem;
+            background: var(--black-deep);
+        }
+
+        .specs-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .spec-card {
+            background: linear-gradient(135deg, rgba(191, 0, 255, 0.05), rgba(75, 0, 130, 0.08));
+            border: 2px solid rgba(191, 0, 255, 0.15);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .spec-card:hover {
+            background: linear-gradient(135deg, rgba(191, 0, 255, 0.1), rgba(75, 0, 130, 0.15));
+            border-color: var(--purple-primary);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(191, 0, 255, 0.2);
+        }
+
+        .spec-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--purple-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .spec-card ul {
+            list-style: none;
+        }
+
+        .spec-card li {
+            padding: 0.8rem 0;
+            color: rgba(255, 255, 255, 0.75);
+            border-bottom: 1px solid rgba(191, 0, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .spec-card li::before {
+            content: '▸';
+            color: var(--purple-primary);
+        }
+
+        .spec-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* About Developer Section */
+        .developer-section {
+            padding: 8rem 2rem;
+            background: linear-gradient(180deg, var(--black-deep), rgba(75, 0, 130, 0.25), var(--black-deep));
+        }
+
+        .developer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .developer-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple-primary), var(--purple-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 4rem;
+            border: 4px solid var(--purple-primary);
+            box-shadow: 0 0 60px var(--purple-glow);
+            animation: avatarPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes avatarPulse {
+            0%, 100% { box-shadow: 0 0 40px var(--purple-glow); }
+            50% { box-shadow: 0 0 80px var(--purple-glow), 0 0 120px var(--purple-secondary); }
+        }
+
+        .developer-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            background: linear-gradient(135deg, white, var(--purple-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .developer-role {
+            font-size: 1.3rem;
+            color: var(--purple-primary);
+            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+        }
+
+        .developer-location {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 3rem;
+        }
+
+        .developer-bio {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+
+        /* Social Icons */
+        .social-section {
+            padding: 4rem 2rem;
+            background: var(--black-deep);
+        }
+
+        .social-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--purple-light);
+        }
+
+        .social-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .social-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2rem;
+            background: linear-gradient(135deg, rgba(191, 0, 255, 0.1), rgba(75, 0, 130, 0.15));
+            border: 2px solid rgba(191, 0, 255, 0.2);
+            border-radius: 15px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.4s ease;
+            min-width: 200px;
+        }
+
+        .social-card:hover {
+            background: linear-gradient(135deg, rgba(191, 0, 255, 0.2), rgba(75, 0, 130, 0.25));
+            border-color: var(--purple-primary);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(191, 0, 255, 0.3);
+        }
+
+        .social-icon {
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--purple-primary), var(--purple-dark));
+        }
+
+        .social-info {
+            text-align: left;
+        }
+
+        .social-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: block;
+        }
+
+        .social-handle {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(180deg, var(--black-deep), rgba(75, 0, 130, 0.2));
+        }
+
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 2.5rem;
+            background: linear-gradient(135deg, rgba(191, 0, 255, 0.15), rgba(75, 0, 130, 0.2));
+            border: 2px solid var(--purple-primary);
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.4s ease;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .contact-card:hover {
+            background: linear-gradient(135deg, var(--purple-primary), var(--purple-dark));
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(191, 0, 255, 0.4);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+        }
+
+        /* EPIC Footer */
+        .footer {
+            padding: 6rem 2rem 3rem;
+            background: linear-gradient(180deg, var(--black-deep), #020205);
+            border-top: 3px solid var(--purple-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--purple-primary), var(--purple-secondary), var(--purple-primary), transparent);
+            animation: borderGlow 3s linear infinite;
+        }
+
+        @keyframes borderGlow {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand {
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--purple-primary), var(--purple-secondary), white);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 40px var(--purple-glow);
+        }
+
+        .footer-tagline {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1rem;
+            letter-spacing: 0.2em;
+        }
+
+        .footer-section h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--purple-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--purple-primary);
+            transform: translateX(10px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(191, 0, 255, 0.2);
+        }
+
+        .footer-copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-heart {
+            color: var(--purple-primary);
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .scene-section {
+                padding: 4rem 1rem;
+            }
+            
+            .features-grid,
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-grid,
+            .contact-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-card,
+            .contact-card {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Grid -->
+    <div class="bg-grid"></div>
+    
+    <!-- Particle System -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="logo-container">
+            <h1 class="main-title">KNOUX</h1>
+            <p class="subtitle">GUARDIAN</p>
+            <p class="tagline">SENTINEL CORE</p>
+            <p class="director">A Cinematic Experience by Eng. Sadek Elgazar</p>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Scene 01: The Awakening -->
+    <section class="scene-section fade-in">
+        <div class="scene-header">
+            <p class="scene-number">SCENE 01</p>
+            <h2 class="scene-title">THE AWAKENING</h2>
+            <p class="scene-title-ar">استيقاظ النظام</p>
+            <p class="scene-duration">⚡ Duration: 15 Seconds | Atmosphere: Epic & Mysterious</p>
+        </div>
+        <div class="scene-image-container">
+            <img src="scene_01_awakening.jpg" alt="The Awakening - Crystalline Shield" class="scene-image">
+        </div>
+        <p class="scene-description">
+            The scene opens in absolute darkness. A single point of vibrant purple light (#bf00ff) pulses like a powerful heartbeat, 
+            revealing a MASSIVE crystalline shield structure with intricate geometric patterns. Intense purple energy veins pulse 
+            through the crystal as dramatic lightning bolts of pure data crackle and spark around the structure. The camera orbits 
+            majestically as the structure rotates, with particles of light floating in the cosmic void.
+        </p>
+    </section>
+
+    <!-- Scene 02: The Architecture -->
+    <section class="scene-section fade-in">
+        <div class="scene-header">
+            <p class="scene-number">SCENE 02</p>
+            <h2 class="scene-title">THE ARCHITECTURE</h2>
+            <p class="scene-title-ar">معمارية العظمة</p>
+            <p class="scene-duration">🏛️ Duration: 20 Seconds | Atmosphere: High-Tech</p>
+        </div>
+        <div class="scene-image-container">
+            <img src="scene_02_architecture.jpg" alt="The Architecture - Floating Mega City" class="scene-image">
+        </div>
+        <p class="scene-description">
+            An epic fly-through of the KNOUX GUARDIAN system architecture rendered as a MASSIVE floating mega city in space. 
+            Enormous purple crystalline structures tower into the cosmic void. The Client Layer features giant floating HTML/CSS/JS 
+            symbols, the API Gateway appears as a colossal ring with rivers of purple energy, the Core Engine is a massive rotating 
+            sphere of pure light with neural networks extending outward like energy tentacles.
+        </p>
+    </section>
+
+    <!-- Scene 03: The 12 Guardians -->
+    <section class="scene-section fade-in">
+        <div class="scene-header">
+            <p class="scene-number">SCENE 03</p>
+            <h2 class="scene-title">THE 12 GUARDIANS</h2>
+            <p class="scene-title-ar">الأوصياء الـ12</p>
+            <p class="scene-duration">🔮 Duration: 30 Seconds | Atmosphere: Power & Control</p>
+        </div>
+        <div class="scene-image-container">
+            <img src="scene_03_guardians.jpg" alt="The 12 Guardians" class="scene-image">
+        </div>
+        <p class="scene-description">
+            A SPECTACULAR showcase of the 12 Guardian modules in a MASSIVE grand throne room of light. Each module is dramatically 
+            revealed with its own unique powerful personality: Application Lifecycle, Backup Orchestrator, Disk Space Monitor, 
+            Driver Health, Forensic Analyzer, Network Monitor, Performance Optimizer, Power Manager, Registry Guardian, 
+            Security Hardener, Thermal Controller, and Update Guardian. All 12 orbit together in a majestic powerful formation.
+        </p>
+    </section>
+
+    <!-- Scene 04: The Dashboard -->
+    <section class="scene-section fade-in">
+        <div class="scene-header">
+            <p class="scene-number">SCENE 04</p>
+            <h2 class="scene-title">THE DASHBOARD</h2>
+            <p class="scene-title-ar">لوحة القيادة</p>
+            <p class="scene-duration">💻 Duration: 25 Seconds | Atmosphere: Dynamic & Alive</p>
+        </div>
+        <div class="scene-image-container">
+            <img src="scene_04_dashboard.jpg" alt="The Dashboard" class="scene-image">
+        </div>
+        <p class="scene-description">
+            The KNOUX GUARDIAN dashboard comes to life with elegant smooth animations. Enormous glass-morphism panels materialize 
+            with blur effects. Giant real-time graphs pulse with intense purple energy - massive CPU gauges fluctuate with neon glow, 
+            large memory charts spin dynamically. The camera dolls through the interface like flying through a digital landscape, 
+            with massive data streams flowing like purple waterfalls.
+        </p>
+    </section>
+
+    <!-- Scene 05: Live Demo -->
+    <section class="scene-section fade-in">
+        <div class="scene-header">
+            <p class="scene-number">SCENE 05</p>
+            <h2 class="scene-title">LIVE DEMO</h2>
+            <p class="scene-title-ar">عرض حي</p>
+            <p class="scene-duration">🔥 Duration: 40 Seconds | Atmosphere: Interactive & Exciting</p>
+        </div>
+        <div class="scene-image-container">
+            <img src="scene_05_demo.jpg" alt="Live Demo" class="scene-image">
+        </div>
+        <p class="scene-description">
+            Dynamic MASSIVE split-screen demonstration showing KNOUX GUARDIAN in action. Massive purple scan lines sweep across 
+            the digital system, red threat dots are neutralized by powerful purple force fields. Huge data streams flow into backup 
+            vaults with purple energy shields. Giant CPU usage graphs smooth out, massive temperature gauges drop with cooling waves, 
+            and enormous firewalls activate to block attacks in dramatic slow motion.
+        </p>
+    </section>
+
+    <!-- Scene 06: Global Protection -->
+    <section class="scene-section fade-in">
+        <div class="scene-header">
+            <p class="scene-number">SCENE 06</p>
+            <h2 class="scene-title">GLOBAL PROTECTION</h2>
+            <p class="scene-title-ar">حماية عالمية</p>
+            <p class="scene-duration">🌍 Duration: 20 Seconds | Atmosphere: Global & Majestic</p>
+        </div>
+        <div class="scene-image-container">
+            <img src="scene_06_global.jpg" alt="Global Protection" class="scene-image">
+        </div>
+        <p class="scene-description">
+            MASSIVE epic global visualization from space. The camera zooms rapidly towards Earth surrounded by an ENORMOUS purple 
+            energy shield protecting the entire planet like a giant dome. Diving through the atmosphere, past continents, into a 
+            city, through a building, and into a massive server room where KNOUX GUARDIAN runs on a giant screen. Pulling back 
+            reveals thousands of purple protection points across the globe.
+        </p>
+    </section>
+
+    <!-- Scene 07: The Future -->
+    <section class="scene-section fade-in">
+        <div class="scene-header">
+            <p class="scene-number">SCENE 07</p>
+            <h2 class="scene-title">THE FUTURE</h2>
+            <p class="scene-title-ar">المستقبل</p>
+            <p class="scene-duration">✨ Duration: 15 Seconds | Atmosphere: Limitless Ambition</p>
+        </div>
+        <div class="scene-image-container">
+            <img src="scene_07_future.jpg" alt="The Future" class="scene-image">
+        </div>
+        <p class="scene-description">
+            Visionary MASSIVE futuristic finale showing the future of KNOUX GUARDIAN. The camera flies through an enormous portal 
+            of purple light into a futuristic mega city landscape where AI robots and humans work together in harmony. Giant floating 
+            holographic interfaces everywhere with intense purple glow. The ENORMOUS KNOUX logo dominates the skyline as a giant 
+            hologram covering buildings.
+        </p>
+    </section>
+
+    <!-- Scene 08: The Creator -->
+    <section class="scene-section fade-in">
+        <div class="scene-header">
+            <p class="scene-number">SCENE 08</p>
+            <h2 class="scene-title">THE CREATOR</h2>
+            <p class="scene-title-ar">المطور</p>
+            <p class="scene-duration">💜 Duration: 10 Seconds | Atmosphere: Personal & Epic</p>
+        </div>
+        <div class="scene-image-container">
+            <img src="scene_08_creator.jpg" alt="The Creator" class="scene-image">
+        </div>
+        <p class="scene-description">
+            ULTRA POWERFUL closing scene with the dramatic silhouette of Eng. Sadek Elgazar standing before a MASSIVE holographic 
+            display of the KNOUX GUARDIAN system covering an entire wall. Bathed in intense dramatic purple rim light and volumetric 
+            lighting rays, the figure exudes absolute confidence and mastery like a true tech visionary. The giant KNOUX logo fades 
+            in below with burning purple fire effect.
+        </p>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section fade-in">
+        <div class="features-container">
+            <h2 class="section-title">⚡ CORE FEATURES</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🛡️</span>
+                    <h3>Security Hardener</h3>
+                    <p>Advanced threat detection and neutralization with real-time monitoring and automatic response systems.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💾</span>
+                    <h3>Backup Orchestrator</h3>
+                    <p>Intelligent backup management with automated scheduling and secure cloud storage integration.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h3>Performance Optimizer</h3>
+                    <p>Real-time system analysis and optimization to maintain peak performance at all times.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🌡️</span>
+                    <h3>Thermal Controller</h3>
+                    <p>Advanced temperature monitoring and cooling management to prevent overheating.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🌐</span>
+                    <h3>Network Monitor</h3>
+                    <p>Comprehensive network traffic analysis with intrusion detection and firewall protection.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔍</span>
+                    <h3>Forensic Analyzer</h3>
+                    <p>Deep system analysis and forensic investigation capabilities for security incidents.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specifications -->
+    <section class="specs-section fade-in">
+        <div class="specs-container">
+            <h2 class="section-title">🎥 TECHNICAL SPECIFICATIONS</h2>
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <h3>📷 CAMERA</h3>
+                    <ul>
+                        <li>ARRI ALEXA 65 IMAX</li>
+                        <li>Anamorphic Prime Lenses</li>
+                        <li>8K IMAX (8176 × 4320)</li>
+                        <li>Aspect Ratio: 2.35:1 Cinemascope</li>
+                        <li>Frame Rate: 60 fps</li>
+                        <li>Shallow Depth of Field</li>
+                    </ul>
+                </div>
+                <div class="spec-card">
+                    <h3>💡 LIGHTING</h3>
+                    <ul>
+                        <li>Volumetric Purple Lighting</li>
+                        <li>Color: #bf00ff, #9d4edd, #4B0082</li>
+                        <li>Dolby Vision HDR</li>
+                        <li>Cinematic Lighting Rigs</li>
+                        <li>Particle Effects</li>
+                        <li>Anamorphic Lens Flares</li>
+                    </ul>
+                </div>
+                <div class="spec-card">
+                    <h3>🎵 SOUNDTRACK</h3>
+                    <ul>
+                        <li>Composer: Hans Zimmer Style</li>
+                        <li>Genre: Epic Hybrid Orchestra</li>
+                        <li>Full Orchestra + Electronic</li>
+                        <li>Choir for Epic Moments</li>
+                        <li>Duration: 3 Minutes</li>
+                        <li>Epic Percussion & Strings</li>
+                    </ul>
+                </div>
+                <div class="spec-card">
+                    <h3>🎬 PRODUCTION</h3>
+                    <ul>
+                        <li>Unreal Engine 5 Cinematic</li>
+                        <li>Motion Blur & Depth of Field</li>
+                        <li>Dolly & Crane Movements</li>
+                        <li>Orbital Rotations</li>
+                        <li>Push-ins & Pull-outs</li>
+                        <li>Smooth Tracking Shots</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developer Section -->
+    <section class="developer-section fade-in">
+        <div class="developer-container">
+            <h2 class="section-title">👨‍💻 ABOUT THE CREATOR</h2>
+            <div class="developer-avatar">👑</div>
+            <h3 class="developer-name">Eng. Sadek Elgazar</h3>
+            <p class="developer-role">Founder & Lead Developer</p>
+            <p class="developer-location">📍 Abu Dhabi, UAE</p>
+            <p class="developer-bio">
+                Visionary software engineer and cybersecurity expert dedicated to creating the next generation 
+                of system protection solutions. With KNOUX GUARDIAN, Eng. Sadek Elgazar brings Hollywood-level 
+                cinematic quality to system security, combining cutting-edge technology with stunning visual experiences.
+            </p>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social-section fade-in">
+        <h3 class="social-title">🌐 CONNECT WITH KNOUX</h3>
+        <div class="social-grid">
+            <a href="https://twitter.com/knoux7" target="_blank" class="social-card">
+                <div class="social-icon">🐦</div>
+                <div class="social-info">
+                    <span class="social-name">Twitter</span>
+                    <span class="social-handle">@knoux7</span>
+                </div>
+            </a>
+            <a href="https://www.facebook.com/share/1bXebP7S7D/" target="_blank" class="social-card">
+                <div class="social-icon">📘</div>
+                <div class="social-info">
+                    <span class="social-name">Facebook</span>
+                    <span class="social-handle">KNOUX Official</span>
+                </div>
+            </a>
+            <a href="https://www.pinterest.com/knoux7" target="_blank" class="social-card">
+                <div class="social-icon">📌</div>
+                <div class="social-info">
+                    <span class="social-name">Pinterest</span>
+                    <span class="social-handle">@knoux7</span>
+                </div>
+            </a>
+            <a href="https://www.tiktok.com/@knoux_7" target="_blank" class="social-card">
+                <div class="social-icon">🎵</div>
+                <div class="social-info">
+                    <span class="social-name">TikTok</span>
+                    <span class="social-handle">@knoux_7</span>
+                </div>
+            </a>
+            <a href="https://www.snapchat.com/add/knooux7" target="_blank" class="social-card">
+                <div class="social-icon">👻</div>
+                <div class="social-info">
+                    <span class="social-name">Snapchat</span>
+                    <span class="social-handle">@knooux7</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section fade-in">
+        <h3 class="social-title">📲 GET IN TOUCH</h3>
+        <div class="contact-grid">
+            <a href="https://wa.me/971503281920" target="_blank" class="contact-card">
+                <span class="contact-icon">💬</span>
+                <span>WhatsApp</span>
+            </a>
+            <a href="mailto:contact@knoux.io" class="contact-card">
+                <span class="contact-icon">📧</span>
+                <span>contact@knoux.io</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- EPIC Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2 class="footer-logo">KNOUX</h2>
+                <p class="footer-tagline">THE FUTURE OF SYSTEM PROTECTION</p>
+            </div>
+            <div class="footer-section">
+                <h4>🎬 CINEMATIC SCENES</h4>
+                <ul class="footer-links">
+                    <li><a href="#">The Awakening</a></li>
+                    <li><a href="#">The Architecture</a></li>
+                    <li><a href="#">The 12 Guardians</a></li>
+                    <li><a href="#">The Dashboard</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>⚡ CORE MODULES</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Security Hardener</a></li>
+                    <li><a href="#">Performance Optimizer</a></li>
+                    <li><a href="#">Network Monitor</a></li>
+                    <li><a href="#">Backup Orchestrator</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>🌐 CONNECT</h4>
+                <ul class="footer-links">
+                    <li><a href="https://twitter.com/knoux7" target="_blank">Twitter</a></li>
+                    <li><a href="https://www.facebook.com/share/1bXebP7S7D/" target="_blank">Facebook</a></li>
+                    <li><a href="https://wa.me/971503281920" target="_blank">WhatsApp</a></li>
+                    <li><a href="mailto:contact@knoux.io">Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copyright">
+                © 2024 KNOUX GUARDIAN. Created with <span class="footer-heart">💜</span> by Eng. Sadek Elgazar | Abu Dhabi, UAE
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Create particle background
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 80; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 12 + 's';
+            particle.style.animationDuration = (8 + Math.random() * 8) + 's';
+            particle.style.opacity = 0.3 + Math.random() * 0.7;
+            particlesContainer.appendChild(particle);
+        }
+
+        // Scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
