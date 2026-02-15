@@ -1,0 +1,340 @@
+/* Knoux OS Guardian - Premium Design System */
+
+:root {
+    /* 🟣 Primary Purple Spectrum */
+    --knoux-neon: #bf00ff;
+    --knoux-bright: #c56aff;
+    --knoux-accent: #9d4edd;
+    --knoux-medium: #7b2cbf;
+    --knoux-primary: #4B0082;
+    --knoux-primary-dark: #2C0255;
+    
+    /* 🌑 Background Spectrum */
+    --bg-deepest: #0a0014;
+    --bg-dark: #120126;
+    --bg-medium: #1f1038;
+    --bg-light: #2d1a4a;
+    
+    /* Global Variables matching Premium Design */
+    --bg-primary: #0a0014;
+    --bg-secondary: #120126;
+    --accent-primary: #bf00ff;
+    --accent-glow: rgba(191, 0, 255, 0.4);
+    --text-primary: #FFFFFF;
+    --text-secondary: #B0B0C0;
+    --card-bg: rgba(31, 16, 56, 0.6);
+    --card-border: rgba(157, 78, 221, 0.25);
+    --success: #00FF88;
+    --error: #FF3355;
+    --warning: #FFB800;
+    --shadow-glow: 0 0 20px var(--accent-glow);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-radius: 16px;
+
+    /* Status Colors */
+    --knoux-success: #00ff88;
+    --knoux-warning: #ffaa00;
+    --knoux-error: #ff0055;
+    --knoux-info: #00aaff;
+    
+    /* Glass Effects */
+    --glass-bg: rgba(31, 16, 56, 0.6); 
+    --glass-border: rgba(157, 78, 221, 0.25);
+    --glass-border-hover: rgba(191, 0, 255, 0.5);
+    --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(157, 78, 221, 0.15) inset;
+    
+    /* Typography */
+    --font-display: 'Orbitron', 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', 'Space Grotesk', sans-serif;
+    --font-mono: 'Space Grotesk', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg-deepest);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Background Effects */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at center, #4B0082 0%, #0a0014 80%);
+    opacity: 0.6;
+    z-index: -2;
+    animation: bg-pulse 15s ease-in-out infinite;
+}
+
+@keyframes bg-pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.8; }
+}
+
+/* Glass Utility */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.5rem;
+    box-shadow: var(--glass-shadow);
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass:hover {
+    border-color: var(--glass-border-hover);
+    transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+    20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+.animate-shake { animation: shake 0.4s ease-in-out; }
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+.shimmer-bg {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite linear;
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+::-webkit-scrollbar-thumb { background: var(--knoux-accent); border-radius: 4px; }
+
+/* --- Provided Components CSS --- */
+
+/* Login Container */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Login Card */
+.login-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  padding: 3rem;
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+  z-index: 1;
+  animation: slideInUp 0.6s ease-out;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Input Base */
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: var(--transition-smooth);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(191, 0, 255, 0.1);
+}
+
+.input-error {
+  border-color: var(--error) !important;
+}
+
+.error-message {
+  color: var(--error);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Button Base */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--accent-primary);
+  background: linear-gradient(135deg, var(--knoux-primary), var(--knoux-accent));
+  color: white;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-primary:hover {
+  background: #c56aff;
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-secondary:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--knoux-accent);
+    color: white;
+}
+.btn-outline:hover {
+    background: rgba(157, 78, 221, 0.1);
+    box-shadow: 0 0 15px rgba(191, 0, 255, 0.2);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* OAuth Divider */
+.oauth-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 1.5rem 0;
+}
+.oauth-divider::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: 50%;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  z-index: 0;
+}
+.oauth-divider span {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-secondary); 
+  padding: 0 10px;
+  color: rgba(255,255,255,0.4);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* OAuth Grid */
+.oauth-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.oauth-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.oauth-card:hover {
+  border-color: var(--accent-primary);
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+}
+
+.oauth-name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Card */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  transition: var(--transition-smooth);
+}

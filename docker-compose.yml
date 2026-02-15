@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  frontend:
+    build: .
+    ports:
+      - "80:80"
+    restart: unless-stopped
+  backend:
+    image: node:20-alpine
+    command: npm start
+    environment:
+      - API_KEY=${API_KEY}
+    networks:
+      - knoux-net
+networks:
+  knoux-net:
+    driver: bridge

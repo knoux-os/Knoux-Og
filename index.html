@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Knoux OS Guardian - Sentinel Core</title>
+    <meta name="description" content="Advanced System Protection Suite with AI-Powered Intelligence">
+    <meta name="theme-color" content="#0a0014">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              knoux: {
+                neon: '#bf00ff',
+                bright: '#c56aff',
+                accent: '#9d4edd',
+                medium: '#7b2cbf',
+                primary: '#4B0082',
+                primaryDark: '#2C0255',
+                bgDeepest: '#0a0014',
+                bgDark: '#120126',
+                bgMedium: '#1f1038',
+                bgLight: '#2d1a4a',
+              }
+            },
+            fontFamily: {
+              display: ['Orbitron', 'sans-serif'],
+              body: ['Inter', 'sans-serif'],
+              mono: ['Space Grotesk', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.564.0",
+    "recharts": "https://esm.sh/recharts@^3.7.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.41.0",
+    "@auth0/auth0-react": "https://esm.sh/@auth0/auth0-react@^2.14.0"
+  }
+}
+</script>
+</head>
+  <body class="theme-dark">
+    <div id="root"></div>
+  </body>
+</html>
